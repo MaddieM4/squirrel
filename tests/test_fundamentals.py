@@ -1,5 +1,5 @@
 import pytest
-import sql
+from squirrel import sql
 
 @pytest.mark.parametrize('param,expected_sql,expected_args', [
     ('some text', 'some text', []),
