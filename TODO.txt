@@ -1,0 +1,18 @@
+Trying to form an overall vision here:
+
+ [ ] SQL Chains
+ [ ] Format/template constructor for SQL Chains
+ [ ] Convenience helpers
+   [ ] SELECT
+   [ ] WHERE
+     [ ] args
+     [ ] kwargs
+     [ ] IN [iterable]
+   [ ] JOIN
+   [ ] GROUP BY
+   [ ] ORDER BY
+   [ ] LIMIT
+   [ ] fn.ANYTHING
+   [ ] fn.ANYTHING(AS=...)
+[ ] Query builder
+[ ] Operator support
