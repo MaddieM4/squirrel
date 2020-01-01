@@ -1,13 +1,21 @@
-class Identifier(object):
-    args = ()
-    def __str__(self):
-        return f'`{self.value}`'
+from squirrel import inspect
 
+class Identifier(object):
     def __init__(self, value):
         self.value = value
 
+    def __str__(self):
+        return f'`{self.value}`'
+
+    def __repr__(self):
+        return f'<Identifier {self}>'
+
 class Chain(tuple):
+    # TODO: handle these in a way that doesn't overlap with getattr access...
     args = ()
+    pad_left = True
+    pad_right = True
+
     def __str__(self):
         return '.'.join(str(ident) for ident in self)
 
