@@ -1,20 +1,9 @@
-from collections import namedtuple
-Inspection = namedtuple('Inspection', 'str, args, pad_left, pad_right')
-
-def flatten(source):
-    return Inspection(
-        str  = stringify(source),
-        args = get_args(source),
-        pad_left  = pad_left(source),
-        pad_right = pad_right(source),
-    )
-
-def stringify(source):
+def text(source):
     if hasattr(source, 'args'):
         return str(source)
     return '%s'
 
-def get_args(source):
+def args(source):
     if hasattr(source, 'args'):
         return source.args
     return (source,)
