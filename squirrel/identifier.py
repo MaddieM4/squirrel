@@ -35,3 +35,5 @@ class Chain(tuple):
     def STAR(self):
         "Explicitly adds the string '*' rather than a wrapped identifier."
         return Chain([*self, snippet.Const.STAR])
+
+ns = Chain()

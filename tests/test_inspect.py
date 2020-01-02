@@ -1,5 +1,6 @@
 import pytest
 from squirrel import ns, Snippet, const, Chain
+from squirrel.helpers import *
 
 @pytest.mark.parametrize('source, expected', [
     ('',   Snippet('%s',   ('',), True, True)),
@@ -20,6 +21,9 @@ from squirrel import ns, Snippet, const, Chain
     (Chain([]), Snippet('', (), False, False)),
     (ns, Snippet('', (), False, False)),
 
+    (SELECT(ns.foo), Snippet('SELECT * FROM `foo`', (), True, True)),
+    (SELECT('mytable', 'x','y','z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
+    (SELECT('mytable', 'x y z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

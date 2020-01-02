@@ -4,7 +4,7 @@ Trying to form an overall vision here:
  [X] SQL Chains
  [X] Format/template constructor for SQL Chains
  [ ] Convenience helpers
-   [ ] SELECT
+   [X] SELECT
    [ ] WHERE
      [ ] args
      [ ] kwargs
