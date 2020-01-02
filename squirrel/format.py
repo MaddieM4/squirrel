@@ -15,4 +15,6 @@ def _gen_format_chunks(text, **args):
         if is_ident:
             yield args[token.strip('{}')]
         else:
-            yield Snippet.from_sql(token)
+            # Expect any desired padding to already be present within token,
+            # no additional padding is necessary.
+            yield Snippet.from_sql(token, pad_left=False, pad_right=False)
