@@ -1,12 +1,8 @@
 def text(source):
-    if hasattr(source, 'args'):
-        return str(source)
-    return '%s'
+    return getattr(source, 'text', '%s')
 
 def args(source):
-    if hasattr(source, 'args'):
-        return source.args
-    return (source,)
+    return getattr(source, 'args', (source,))
 
 def pad_left(source):
     return getattr(source, 'pad_left', True)

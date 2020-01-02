@@ -1,23 +1,29 @@
-from squirrel import inspect
+from squirrel import inspect, snippet
 
-class Identifier(object):
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return f'`{self.value}`'
+class Identifier(str):
+    @property
+    def text(self):
+        return f'`{self}`'
 
     def __repr__(self):
-        return f'<Identifier {self}>'
+        return f'<Identifier "{self}">'
 
 class Chain(tuple):
     # TODO: handle these in a way that doesn't overlap with getattr access...
     args = ()
-    pad_left = True
-    pad_right = True
+
+    @property
+    def text(self):
+        return '.'.join(inspect.text(ident) for ident in self)
+
+    @property
+    def pad_left(self): return bool(self)
+
+    @property
+    def pad_right(self): return bool(self)
 
     def __str__(self):
-        return '.'.join(str(ident) for ident in self)
+        return self.text
 
     def __getitem__(self, k):
         return Chain([*self, Identifier(k)])
@@ -28,4 +34,4 @@ class Chain(tuple):
     @property
     def STAR(self):
         "Explicitly adds the string '*' rather than a wrapped identifier."
-        return Chain([*self, '*'])
+        return Chain([*self, snippet.Const.STAR])

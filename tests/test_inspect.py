@@ -1,5 +1,5 @@
 import pytest
-from squirrel import ns, Snippet, const
+from squirrel import ns, Snippet, const, Chain
 
 @pytest.mark.parametrize('source, expected', [
     ('',   Snippet('%s',   ('',), True, True)),
@@ -12,6 +12,14 @@ from squirrel import ns, Snippet, const
 
     (const.LPAREN, Snippet('(', (), True, False)),
     (const.RPAREN, Snippet(')', (), False, True)),
+    (Chain(['hello', 'world']), Snippet('%s %s', ('hello', 'world'), True, True)),
+    (Chain([ns.foo, const.EQUALS, ns.bar.baz]), Snippet('`foo` = `bar`.`baz`', (), True, True)),
+    (Chain([ns.foo, const.EQUALS, const.LPAREN]), Snippet('`foo` = (', (), True, False)),
+    (Chain([const.RPAREN, ns.foo]), Snippet(') `foo`', (), False, True)),
+    (Chain([const.LPAREN, ns.foo, const.RPAREN]), Snippet('(`foo`)', (), True, True)),
+    (Chain([]), Snippet('', (), False, False)),
+    (ns, Snippet('', (), False, False)),
+
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

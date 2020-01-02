@@ -1,7 +1,7 @@
 Trying to form an overall vision here:
 
  [X] SQL Snippet (replaces Inspection and, conceptually, Raw)
- [ ] SQL Chains
+ [X] SQL Chains
  [ ] Format/template constructor for SQL Chains
  [ ] Convenience helpers
    [ ] SELECT
