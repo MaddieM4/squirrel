@@ -7,9 +7,9 @@ Trying to form an overall vision here:
    [X] SELECT
    [X] AND
    [X] OR
-   [ ] WHERE
-     [ ] args
-     [ ] kwargs
+   [X] WHERE
+     [X] args
+     [X] kwargs
      [ ] IN [iterable]
    [ ] JOIN
    [ ] GROUP BY

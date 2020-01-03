@@ -31,6 +31,11 @@ class Chain(tuple):
     def __getattr__(self, k):
         return self[k]
 
+    def __eq__(self, other):
+        from .chain import Chain as SQLChain
+        from .snippet import Const
+        return SQLChain([self, Const.EQUALS, other])
+
     @property
     def STAR(self):
         "Explicitly adds the string '*' rather than a wrapped identifier."

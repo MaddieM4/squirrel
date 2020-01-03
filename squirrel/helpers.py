@@ -2,9 +2,19 @@ from .identifier import ns
 from .snippet import Const as const
 from .chain import Chain
 
-def SELECT(table, *cols):
+def AND(*sections):
+    return Chain.join(const.AND, sections)
+
+def OR(*sections):
+    return Chain.join(const.OR, sections)
+
+def _ensure_table(table):
     if isinstance(table, str):
-        table = ns[table]
+        return ns[table]
+    return table
+
+def SELECT(table, *cols):
+    table = _ensure_table(table)
     if not cols:
         cols = (const.STAR,)
 
@@ -23,8 +33,9 @@ def SELECT(table, *cols):
         table
     ])
 
-def AND(*sections):
-    return Chain.join(const.AND, sections)
-
-def OR(*sections):
-    return Chain.join(const.OR, sections)
+def WHERE(*args, **kwargs):
+    clauses = args
+    if kwargs:
+        table = _ensure_table(args[0])
+        clauses = list(args[1:]) + [table[k] == v for k,v in kwargs.items()]
+    return Chain([ const.WHERE, AND(*clauses) ])

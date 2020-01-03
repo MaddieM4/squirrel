@@ -40,3 +40,4 @@ class Const(object):
 
     SELECT = Snippet.from_sql('SELECT')
     FROM   = Snippet.from_sql('FROM')
+    WHERE  = Snippet.from_sql('WHERE')
