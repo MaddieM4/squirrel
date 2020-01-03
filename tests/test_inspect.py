@@ -24,6 +24,10 @@ from squirrel.helpers import *
     (SELECT(ns.foo), Snippet('SELECT * FROM `foo`', (), True, True)),
     (SELECT('mytable', 'x','y','z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
     (SELECT('mytable', 'x y z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
+
+    (AND(), Snippet('', (), False, False)),
+    (AND(1,2,3), Snippet('%s AND %s AND %s', (1, 2, 3), True, True)),
+    (OR(ns.foo, ns.bar), Snippet('`foo` OR `bar`', (), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

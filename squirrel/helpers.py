@@ -22,3 +22,9 @@ def SELECT(table, *cols):
         const.FROM,
         table
     ])
+
+def AND(*sections):
+    return Chain.join(const.AND, sections)
+
+def OR(*sections):
+    return Chain.join(const.OR, sections)

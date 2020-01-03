@@ -5,6 +5,8 @@ Trying to form an overall vision here:
  [X] Format/template constructor for SQL Chains
  [ ] Convenience helpers
    [X] SELECT
+   [X] AND
+   [X] OR
    [ ] WHERE
      [ ] args
      [ ] kwargs
