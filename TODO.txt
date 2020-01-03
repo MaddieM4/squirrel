@@ -10,7 +10,7 @@ Trying to form an overall vision here:
    [X] WHERE
      [X] args
      [X] kwargs
-     [ ] IN [iterable]
+     [X] IN [iterable]
    [ ] JOIN
    [ ] GROUP BY
    [ ] ORDER BY

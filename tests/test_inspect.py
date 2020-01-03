@@ -30,12 +30,16 @@ from squirrel.helpers import *
     (OR(ns.foo, ns.bar), Snippet('`foo` OR `bar`', (), True, True)),
 
     (ns.hello.world == 5, Snippet('`hello`.`world` = %s', (5,), True, True)),
+    (ns.hello.world == None, Snippet('`hello`.`world` IS NULL', (), True, True)),
+    (ns.hello.world == [1,2,3], Snippet('`hello`.`world` IN (%s, %s, %s)', (1,2,3), True, True)),
+    (ns.hello.world == [], Snippet('`hello`.`world` IN ()', (), True, True)),
 
     (WHERE(ns.foo, bar='baz'), Snippet('WHERE `foo`.`bar` = %s', ('baz',), True, True)),
     (WHERE('foo', first=1, second=2), Snippet('WHERE `foo`.`first` = %s AND `foo`.`second` = %s', (1,2), True, True)),
     (WHERE(ns.foo.bar == 5, ns.foo.baz == 'xyz'), Snippet('WHERE `foo`.`bar` = %s AND `foo`.`baz` = %s', (5,'xyz'), True, True)),
     (WHERE('mytable', ns.foo.bar == 5, ns.foo.baz == 'xyz', myfield=9),
         Snippet('WHERE `foo`.`bar` = %s AND `foo`.`baz` = %s AND `mytable`.`myfield` = %s', (5,'xyz',9), True, True)),
+    (WHERE('mytable', id=[4,5,6]), Snippet('WHERE `mytable`.`id` IN (%s, %s, %s)', (4,5,6), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

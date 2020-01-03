@@ -33,10 +33,15 @@ class Const(object):
     RPAREN = Snippet.from_sql(')', pad_left=False)
     COMMA  = Snippet.from_sql(',', pad_left=False)
     EQUALS = Snippet.from_sql('=')
+    TRUE   = Snippet.from_sql('(1=1)')
+    FALSE  = Snippet.from_sql('(1=0)')
     STAR = Snippet.from_sql('*')
+    NULL = Snippet.from_sql('NULL')
 
     AND = Snippet.from_sql('AND')
     OR  = Snippet.from_sql('OR')
+    IS  = Snippet.from_sql('IS')
+    IN  = Snippet.from_sql('IN')
 
     SELECT = Snippet.from_sql('SELECT')
     FROM   = Snippet.from_sql('FROM')

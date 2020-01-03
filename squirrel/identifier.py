@@ -34,6 +34,11 @@ class Chain(tuple):
     def __eq__(self, other):
         from .chain import Chain as SQLChain
         from .snippet import Const
+        if other is None:
+            return SQLChain([self, Const.IS, Const.NULL])
+        if isinstance(other, list):
+            items = SQLChain.join(Const.COMMA, other)
+            return SQLChain([self, Const.IN, Const.LPAREN, items, Const.RPAREN])
         return SQLChain([self, Const.EQUALS, other])
 
     @property
