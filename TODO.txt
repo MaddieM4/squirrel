@@ -20,6 +20,6 @@ Trying to form an overall vision here:
    [X] LIMIT
    [X] OFFSET
    [X] fn.ANYTHING
-   [ ] fn.ANYTHING(AS=...)
+   [X] fn.ANYTHING(AS=...)
 [ ] Query builder
 [ ] Operator support (more detail)

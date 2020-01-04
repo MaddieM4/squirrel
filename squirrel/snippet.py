@@ -43,6 +43,7 @@ class Const(object):
     IS  = Snippet.from_sql('IS')
     IN  = Snippet.from_sql('IN')
     ON  = Snippet.from_sql('ON')
+    AS  = Snippet.from_sql('AS')
 
     SELECT = Snippet.from_sql('SELECT')
     FROM   = Snippet.from_sql('FROM')

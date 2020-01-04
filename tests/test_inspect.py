@@ -74,6 +74,7 @@ from squirrel.helpers import *
 
     (fn.UCASE(ns.title), Snippet('UCASE(`title`)', (), True, True)),
     (fn.COALESCE(1, 2, 3, 4), Snippet('COALESCE(%s, %s, %s, %s)', (1,2,3,4), True, True)),
+    (fn.CAST(1, AS='UNSIGNED'), Snippet('CAST(%s AS UNSIGNED)', (1,), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

@@ -85,7 +85,10 @@ def OFFSET(*content):
 
 class FN(object):
     def __getattr__(self, name):
-        def fn(*args):
+        def fn(*args, AS=None):
+            if AS:
+                AS = Snippet.from_sql(AS)
+                args = [Chain([arg, const.AS, AS]) for arg in args]
             return Chain([
                 Snippet.from_sql(name, pad_right=False),
                 const.LPAREN,
