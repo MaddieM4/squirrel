@@ -12,10 +12,13 @@ Trying to form an overall vision here:
      [X] kwargs
      [X] IN [iterable]
    [ ] JOIN
+     [X] Inspection support for [list]s
+     [ ] Support ident == ('<', value)
+     [ ] inner/outer separation, where outer function does "parsing", and inner function has rigid interface
    [ ] GROUP BY
    [ ] ORDER BY
    [ ] LIMIT
    [ ] fn.ANYTHING
    [ ] fn.ANYTHING(AS=...)
 [ ] Query builder
-[ ] Operator support
+[ ] Operator support (more detail)

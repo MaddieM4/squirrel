@@ -7,6 +7,7 @@ from squirrel.helpers import *
     ('fx', Snippet('%s', ('fx',), True, True)),
     (None, Snippet('%s', (None,), True, True)),
     (35,   Snippet('%s',   (35,), True, True)),
+    ([35, 'yo', ns.wexford],   Snippet('(%s, %s, `wexford`)', (35,'yo'), True, True)),
 
     (ns.hello.world, Snippet('`hello`.`world`', (), True, True)),
     (ns.STAR, Snippet('*', (), True, True)),
