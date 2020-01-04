@@ -71,6 +71,9 @@ from squirrel.helpers import *
     (OFFSET(), Snippet('', (), False, False)),
     (OFFSET(None), Snippet('', (), False, False)),
     (OFFSET(0), Snippet('OFFSET %s', (0,), True, True)),
+
+    (fn.UCASE(ns.title), Snippet('UCASE(`title`)', (), True, True)),
+    (fn.COALESCE(1, 2, 3, 4), Snippet('COALESCE(%s, %s, %s, %s)', (1,2,3,4), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly

@@ -1,5 +1,5 @@
 from .identifier import ns
-from .snippet import Const as const
+from .snippet import Snippet, Const as const
 from .chain import Chain
 
 def AND(*sections):
@@ -82,3 +82,16 @@ def LIMIT(*content):
 
 def OFFSET(*content):
     return _if_content(const.OFFSET, *content)
+
+class FN(object):
+    def __getattr__(self, name):
+        def fn(*args):
+            return Chain([
+                Snippet.from_sql(name, pad_right=False),
+                const.LPAREN,
+                Chain.join(const.COMMA, args),
+                const.RPAREN,
+            ])
+        return fn
+
+fn = FN()

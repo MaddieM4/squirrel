@@ -19,7 +19,7 @@ Trying to form an overall vision here:
    [X] ORDER BY
    [X] LIMIT
    [X] OFFSET
-   [ ] fn.ANYTHING
+   [X] fn.ANYTHING
    [ ] fn.ANYTHING(AS=...)
 [ ] Query builder
 [ ] Operator support (more detail)
