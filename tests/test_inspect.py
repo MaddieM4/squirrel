@@ -41,6 +41,7 @@ from squirrel.helpers import *
     (WHERE('mytable', ns.foo.bar == 5, ns.foo.baz == 'xyz', myfield=9),
         Snippet('WHERE `foo`.`bar` = %s AND `foo`.`baz` = %s AND `mytable`.`myfield` = %s', (5,'xyz',9), True, True)),
     (WHERE('mytable', id=[4,5,6]), Snippet('WHERE `mytable`.`id` IN (%s, %s, %s)', (4,5,6), True, True)),
+    (WHERE('mytable', id=('>', 5)), Snippet('WHERE `mytable`.`id` > %s', (5,), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly
@@ -48,3 +49,9 @@ def test_inspect(source, expected):
     assert isinstance(got.args, tuple)
     assert isinstance(expected.args, tuple)
     assert got == expected
+
+def test_operator_assert():
+    with pytest.raises(AssertionError, match="'xyz' must be an operator"):
+        ns.foo == ('xyz', 7)
+    # This should be fine
+    ns.foo == ('>', 7)
