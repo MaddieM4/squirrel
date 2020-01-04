@@ -54,4 +54,14 @@ class Chain(tuple):
         "Explicitly adds the string '*' rather than a wrapped identifier."
         return Chain([*self, snippet.Const.STAR])
 
+    @property
+    def ASC(self):
+        from .chain import Chain as SQLChain
+        return SQLChain([self, snippet.Const.ASC])
+
+    @property
+    def DESC(self):
+        from .chain import Chain as SQLChain
+        return SQLChain([self, snippet.Const.DESC])
+
 ns = Chain()

@@ -48,3 +48,10 @@ class Const(object):
     FROM   = Snippet.from_sql('FROM')
     WHERE  = Snippet.from_sql('WHERE')
     JOIN   = Snippet.from_sql('JOIN')
+
+    GROUP_BY = Snippet.from_sql('GROUP BY')
+    ORDER_BY = Snippet.from_sql('ORDER BY')
+    LIMIT    = Snippet.from_sql('LIMIT')
+    OFFSET   = Snippet.from_sql('OFFSET')
+    ASC  = Snippet.from_sql('ASCENDING')
+    DESC = Snippet.from_sql('DESCENDING')

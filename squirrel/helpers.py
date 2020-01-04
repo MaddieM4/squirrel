@@ -63,3 +63,22 @@ def JOIN(primary_table, secondary_table, *cols, join_type=const.JOIN, raw_clause
             + raw_clauses
     assert clauses, "JOIN must have clauses"
     return Chain([join_type, _ensure_table(secondary_table), const.ON, AND(*clauses)])
+
+def _if_content(prefix, *content):
+    if content == ():
+        return Chain([])
+    if len(content) == 1 and content[0] is None:
+        return Chain([])
+    return Chain([prefix, *content])
+
+def GROUP_BY(*content):
+    return _if_content(const.GROUP_BY, *content)
+
+def ORDER_BY(*content):
+    return _if_content(const.ORDER_BY, *content)
+
+def LIMIT(*content):
+    return _if_content(const.LIMIT, *content)
+
+def OFFSET(*content):
+    return _if_content(const.OFFSET, *content)

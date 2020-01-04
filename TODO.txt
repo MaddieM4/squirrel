@@ -15,9 +15,10 @@ Trying to form an overall vision here:
      [X] Inspection support for [list]s
      [X] Support ident == ('<', value)
      [X] inner/outer separation, where outer function does "parsing", and inner function has rigid interface
-   [ ] GROUP BY
-   [ ] ORDER BY
-   [ ] LIMIT
+   [X] GROUP BY
+   [X] ORDER BY
+   [X] LIMIT
+   [X] OFFSET
    [ ] fn.ANYTHING
    [ ] fn.ANYTHING(AS=...)
 [ ] Query builder

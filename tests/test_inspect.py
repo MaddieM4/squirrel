@@ -51,6 +51,26 @@ from squirrel.helpers import *
         Snippet('JOIN `y` ON `y`.`a` = `x`.`a` AND `y`.`b` = `x`.`b` AND `y`.`c` = %s AND `y`.`d` = %s', ('hello', 'world'), True, True)),
     (JOIN('x','y', id=('>', 180)),
         Snippet('JOIN `y` ON `y`.`id` > %s', (180,), True, True)),
+
+    (GROUP_BY(), Snippet('', (), False, False)),
+    (GROUP_BY(None), Snippet('', (), False, False)),
+    (GROUP_BY(0), Snippet('GROUP BY %s', (0,), True, True)),
+    (GROUP_BY(ns.foo.bar), Snippet('GROUP BY `foo`.`bar`', (), True, True)),
+
+    (ORDER_BY(), Snippet('', (), False, False)),
+    (ORDER_BY(None), Snippet('', (), False, False)),
+    (ORDER_BY(0), Snippet('ORDER BY %s', (0,), True, True)),
+    (ORDER_BY(ns.foo.bar, const.ASC), Snippet('ORDER BY `foo`.`bar` ASCENDING', (), True, True)),
+    (ORDER_BY(ns.foo.bar.ASC), Snippet('ORDER BY `foo`.`bar` ASCENDING', (), True, True)),
+    (ORDER_BY(ns.foo.bar.DESC), Snippet('ORDER BY `foo`.`bar` DESCENDING', (), True, True)),
+
+    (LIMIT(), Snippet('', (), False, False)),
+    (LIMIT(None), Snippet('', (), False, False)),
+    (LIMIT(0), Snippet('LIMIT %s', (0,), True, True)),
+
+    (OFFSET(), Snippet('', (), False, False)),
+    (OFFSET(None), Snippet('', (), False, False)),
+    (OFFSET(0), Snippet('OFFSET %s', (0,), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly
