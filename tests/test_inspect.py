@@ -34,6 +34,8 @@ from squirrel.helpers import *
     (ns.hello.world == None, Snippet('`hello`.`world` IS NULL', (), True, True)),
     (ns.hello.world == [1,2,3], Snippet('`hello`.`world` IN (%s, %s, %s)', (1,2,3), True, True)),
     (ns.hello.world == [], Snippet('`hello`.`world` IN ()', (), True, True)),
+    (ns.hello.world == ('>=', 7), Snippet('`hello`.`world` >= %s', (7,), True, True)),
+    (ns.hello.world == ns.goodnight.moon, Snippet('`hello`.`world` = `goodnight`.`moon`', (), True, True)),
 
     (WHERE(ns.foo, bar='baz'), Snippet('WHERE `foo`.`bar` = %s', ('baz',), True, True)),
     (WHERE('foo', first=1, second=2), Snippet('WHERE `foo`.`first` = %s AND `foo`.`second` = %s', (1,2), True, True)),
@@ -42,6 +44,13 @@ from squirrel.helpers import *
         Snippet('WHERE `foo`.`bar` = %s AND `foo`.`baz` = %s AND `mytable`.`myfield` = %s', (5,'xyz',9), True, True)),
     (WHERE('mytable', id=[4,5,6]), Snippet('WHERE `mytable`.`id` IN (%s, %s, %s)', (4,5,6), True, True)),
     (WHERE('mytable', id=('>', 5)), Snippet('WHERE `mytable`.`id` > %s', (5,), True, True)),
+
+    (JOIN('x','y', 'a b c d'),
+        Snippet('JOIN `y` ON `y`.`a` = `x`.`a` AND `y`.`b` = `x`.`b` AND `y`.`c` = `x`.`c` AND `y`.`d` = `x`.`d`', (), True, True)),
+    (JOIN('x','y', 'a','b', c='hello', d='world'),
+        Snippet('JOIN `y` ON `y`.`a` = `x`.`a` AND `y`.`b` = `x`.`b` AND `y`.`c` = %s AND `y`.`d` = %s', ('hello', 'world'), True, True)),
+    (JOIN('x','y', id=('>', 180)),
+        Snippet('JOIN `y` ON `y`.`id` > %s', (180,), True, True)),
 ])
 def test_inspect(source, expected):
     # Test this via Snippet.from_inspect since it covers everything neatly
@@ -55,3 +64,7 @@ def test_operator_assert():
         ns.foo == ('xyz', 7)
     # This should be fine
     ns.foo == ('>', 7)
+
+def test_join_clause_assert():
+    with pytest.raises(AssertionError, match="JOIN must have clauses"):
+        JOIN('x', 'y')

@@ -38,10 +38,15 @@ class Chain(tuple):
             return SQLChain([self, Const.IS, Const.NULL])
         if isinstance(other, list):
             return SQLChain([self, Const.IN, other])
-        if isinstance(other, tuple) and len(other) == 2:
+
+        # Deliberately not isinstance(other, tuple).
+        # We only want to handle plain tuples this way,
+        # not any of our lovely subclasses.
+        if type(other) == tuple and len(other) == 2:
             op, value = other
             assert op in ('>', '<', '=', '<=', '>=', '!='), f"{op!r} must be an operator"
             return SQLChain([self, snippet.Snippet.from_sql(op), value])
+
         return SQLChain([self, Const.EQUALS, other])
 
     @property

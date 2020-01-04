@@ -11,10 +11,10 @@ Trying to form an overall vision here:
      [X] args
      [X] kwargs
      [X] IN [iterable]
-   [ ] JOIN
+   [X] JOIN
      [X] Inspection support for [list]s
      [X] Support ident == ('<', value)
-     [ ] inner/outer separation, where outer function does "parsing", and inner function has rigid interface
+     [X] inner/outer separation, where outer function does "parsing", and inner function has rigid interface
    [ ] GROUP BY
    [ ] ORDER BY
    [ ] LIMIT

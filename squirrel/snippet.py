@@ -42,7 +42,9 @@ class Const(object):
     OR  = Snippet.from_sql('OR')
     IS  = Snippet.from_sql('IS')
     IN  = Snippet.from_sql('IN')
+    ON  = Snippet.from_sql('ON')
 
     SELECT = Snippet.from_sql('SELECT')
     FROM   = Snippet.from_sql('FROM')
     WHERE  = Snippet.from_sql('WHERE')
+    JOIN   = Snippet.from_sql('JOIN')
