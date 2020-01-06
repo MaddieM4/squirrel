@@ -20,7 +20,7 @@ class Chain(tuple):
     def pad_left(self): return bool(self)
 
     @property
-    def pad_right(self): return bool(self)
+    def pad_right(self): return True
 
     def __str__(self):
         return self.text

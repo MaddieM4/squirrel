@@ -32,7 +32,7 @@ class Chain(tuple):
     @property
     def pad_right(self):
         if not len(self):
-            return False
+            return True
         return inspect.pad_right(self[-1])
 
     @classmethod

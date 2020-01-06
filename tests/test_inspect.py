@@ -19,14 +19,14 @@ from squirrel.helpers import *
     (Chain([ns.foo, const.EQUALS, const.LPAREN]), Snippet('`foo` = (', (), True, False)),
     (Chain([const.RPAREN, ns.foo]), Snippet(') `foo`', (), False, True)),
     (Chain([const.LPAREN, ns.foo, const.RPAREN]), Snippet('(`foo`)', (), True, True)),
-    (Chain([]), Snippet('', (), False, False)),
-    (ns, Snippet('', (), False, False)),
+    (Chain([]), Snippet('', (), False, True)),
+    (ns, Snippet('', (), False, True)),
 
     (SELECT(ns.foo), Snippet('SELECT * FROM `foo`', (), True, True)),
     (SELECT('mytable', 'x','y','z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
     (SELECT('mytable', 'x y z'), Snippet('SELECT `mytable`.`x`, `mytable`.`y`, `mytable`.`z` FROM `mytable`', (), True, True)),
 
-    (AND(), Snippet('', (), False, False)),
+    (AND(), Snippet('', (), False, True)),
     (AND(1,2,3), Snippet('%s AND %s AND %s', (1, 2, 3), True, True)),
     (OR(ns.foo, ns.bar), Snippet('`foo` OR `bar`', (), True, True)),
 
@@ -52,24 +52,24 @@ from squirrel.helpers import *
     (JOIN('x','y', id=('>', 180)),
         Snippet('JOIN `y` ON `y`.`id` > %s', (180,), True, True)),
 
-    (GROUP_BY(), Snippet('', (), False, False)),
-    (GROUP_BY(None), Snippet('', (), False, False)),
+    (GROUP_BY(), Snippet('', (), False, True)),
+    (GROUP_BY(None), Snippet('', (), False, True)),
     (GROUP_BY(0), Snippet('GROUP BY %s', (0,), True, True)),
     (GROUP_BY(ns.foo.bar), Snippet('GROUP BY `foo`.`bar`', (), True, True)),
 
-    (ORDER_BY(), Snippet('', (), False, False)),
-    (ORDER_BY(None), Snippet('', (), False, False)),
+    (ORDER_BY(), Snippet('', (), False, True)),
+    (ORDER_BY(None), Snippet('', (), False, True)),
     (ORDER_BY(0), Snippet('ORDER BY %s', (0,), True, True)),
     (ORDER_BY(ns.foo.bar, const.ASC), Snippet('ORDER BY `foo`.`bar` ASCENDING', (), True, True)),
     (ORDER_BY(ns.foo.bar.ASC), Snippet('ORDER BY `foo`.`bar` ASCENDING', (), True, True)),
     (ORDER_BY(ns.foo.bar.DESC), Snippet('ORDER BY `foo`.`bar` DESCENDING', (), True, True)),
 
-    (LIMIT(), Snippet('', (), False, False)),
-    (LIMIT(None), Snippet('', (), False, False)),
+    (LIMIT(), Snippet('', (), False, True)),
+    (LIMIT(None), Snippet('', (), False, True)),
     (LIMIT(0), Snippet('LIMIT %s', (0,), True, True)),
 
-    (OFFSET(), Snippet('', (), False, False)),
-    (OFFSET(None), Snippet('', (), False, False)),
+    (OFFSET(), Snippet('', (), False, True)),
+    (OFFSET(None), Snippet('', (), False, True)),
     (OFFSET(0), Snippet('OFFSET %s', (0,), True, True)),
 
     (fn.UCASE(ns.title), Snippet('UCASE(`title`)', (), True, True)),

@@ -3,7 +3,7 @@ Trying to form an overall vision here:
  [X] SQL Snippet (replaces Inspection and, conceptually, Raw)
  [X] SQL Chains
  [X] Format/template constructor for SQL Chains
- [ ] Convenience helpers
+ [X] Convenience helpers
    [X] SELECT
    [X] AND
    [X] OR
@@ -22,4 +22,8 @@ Trying to form an overall vision here:
    [X] fn.ANYTHING
    [X] fn.ANYTHING(AS=...)
 [ ] Query builder
+   [X] SELECT
+   [ ] INSERT
+   [ ] UPDATE
+   [ ] DELETE
 [ ] Operator support (more detail)

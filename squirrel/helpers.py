@@ -64,10 +64,17 @@ def JOIN(primary_table, secondary_table, *cols, join_type=const.JOIN, raw_clause
     assert clauses, "JOIN must have clauses"
     return Chain([join_type, _ensure_table(secondary_table), const.ON, AND(*clauses)])
 
+def _is_blank(c):
+    if c is None:
+        return True
+    if hasattr(c, '__len__') and len(c) == 0:
+        return True
+    return False
+
 def _if_content(prefix, *content):
     if content == ():
         return Chain([])
-    if len(content) == 1 and content[0] is None:
+    if len(content) == 1 and _is_blank(content[0]):
         return Chain([])
     return Chain([prefix, *content])
 
