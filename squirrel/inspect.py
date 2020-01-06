@@ -17,7 +17,7 @@ def pad_right(source):
 @text.register(list)
 def list_text(source):
     inner = ', '.join((text(item) for item in source))
-    return f'({inner})'
+    return '(' + inner + ')'
 
 @args.register(list)
 def list_args(source):

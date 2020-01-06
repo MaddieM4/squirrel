@@ -3,10 +3,10 @@ from squirrel import inspect, snippet
 class Identifier(str):
     @property
     def text(self):
-        return f'`{self}`'
+        return '`' + self + '`'
 
     def __repr__(self):
-        return f'<Identifier "{self}">'
+        return '<Identifier "' + self + '">'
 
 class Chain(tuple):
     # TODO: handle these in a way that doesn't overlap with getattr access...
@@ -44,7 +44,7 @@ class Chain(tuple):
         # not any of our lovely subclasses.
         if type(other) == tuple and len(other) == 2:
             op, value = other
-            assert op in ('>', '<', '=', '<=', '>=', '!='), f"{op!r} must be an operator"
+            assert op in ('>', '<', '=', '<=', '>=', '!='), repr(op)+" must be an operator"
             return SQLChain([self, snippet.Snippet.from_sql(op), value])
 
         return SQLChain([self, Const.EQUALS, other])
