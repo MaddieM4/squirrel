@@ -57,7 +57,7 @@ def _table_comparisons(primary_table, secondary_table, *cols):
         for c in _split_cols(*cols)
     ]
 
-def JOIN(primary_table, secondary_table, *cols, join_type=const.JOIN, raw_clauses=[], **kwargs):
+def JOIN(join_type, primary_table, secondary_table, *cols, raw_clauses=[], **kwargs):
     clauses = _table_comparisons(primary_table, secondary_table, *cols) \
             + _comparisons(secondary_table, **kwargs) \
             + raw_clauses

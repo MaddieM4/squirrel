@@ -45,11 +45,11 @@ from squirrel.helpers import *
     (WHERE('mytable', id=[4,5,6]), Snippet('WHERE `mytable`.`id` IN (%s, %s, %s)', (4,5,6), True, True)),
     (WHERE('mytable', id=('>', 5)), Snippet('WHERE `mytable`.`id` > %s', (5,), True, True)),
 
-    (JOIN('x','y', 'a b c d'),
+    (JOIN(const.JOIN, 'x','y', 'a b c d'),
         Snippet('JOIN `y` ON `y`.`a` = `x`.`a` AND `y`.`b` = `x`.`b` AND `y`.`c` = `x`.`c` AND `y`.`d` = `x`.`d`', (), True, True)),
-    (JOIN('x','y', 'a','b', c='hello', d='world'),
+    (JOIN(const.JOIN, 'x','y', 'a','b', c='hello', d='world'),
         Snippet('JOIN `y` ON `y`.`a` = `x`.`a` AND `y`.`b` = `x`.`b` AND `y`.`c` = %s AND `y`.`d` = %s', ('hello', 'world'), True, True)),
-    (JOIN('x','y', id=('>', 180)),
+    (JOIN(const.JOIN, 'x','y', id=('>', 180)),
         Snippet('JOIN `y` ON `y`.`id` > %s', (180,), True, True)),
 
     (GROUP_BY(), Snippet('', (), False, True)),
@@ -91,4 +91,4 @@ def test_operator_assert():
 
 def test_join_clause_assert():
     with pytest.raises(AssertionError, match="JOIN must have clauses"):
-        JOIN('x', 'y')
+        JOIN(const.JOIN, 'x', 'y')

@@ -10,9 +10,15 @@ class SELECT(object):
         self.limit = None
         self.offset = None
 
-    def JOIN(self, table, *args, **kwargs):
-        self.joins.append(helpers.JOIN(self.table, table, *args, **kwargs))
+    def _join(self, join_type, *args, **kwargs):
+        self.joins.append(helpers.JOIN(join_type, self.table, *args, **kwargs))
         return self
+
+    def JOIN(self, *args, **kwargs):
+        return self._join(const.JOIN, *args, **kwargs)
+
+    def LEFT_JOIN(self, *args, **kwargs):
+        return self._join(const.LEFT_JOIN, *args, **kwargs)
 
     def WHERE(self, *args, **kwargs):
         self.where += list(args)
