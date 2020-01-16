@@ -1,4 +1,4 @@
-from squirrel import inspect, snippet
+from squirrel import inspect, snippet, base
 
 class Identifier(str):
     @property
@@ -8,7 +8,7 @@ class Identifier(str):
     def __repr__(self):
         return '<Identifier "' + self + '">'
 
-class Chain(tuple):
+class Chain(base.SquirrelBase, tuple):
     # TODO: handle these in a way that doesn't overlap with getattr access...
     args = ()
 
@@ -30,24 +30,6 @@ class Chain(tuple):
 
     def __getattr__(self, k):
         return self[k]
-
-    def __eq__(self, other):
-        from .chain import Chain as SQLChain
-        from .snippet import Const
-        if other is None:
-            return SQLChain([self, Const.IS, Const.NULL])
-        if isinstance(other, list):
-            return SQLChain([self, Const.IN, other])
-
-        # Deliberately not isinstance(other, tuple).
-        # We only want to handle plain tuples this way,
-        # not any of our lovely subclasses.
-        if type(other) == tuple and len(other) == 2:
-            op, value = other
-            assert op in ('>', '<', '=', '<=', '>=', '!='), repr(op)+" must be an operator"
-            return SQLChain([self, snippet.Snippet.from_sql(op), value])
-
-        return SQLChain([self, Const.EQUALS, other])
 
     @property
     def STAR(self):

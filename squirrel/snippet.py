@@ -1,7 +1,8 @@
 from collections import namedtuple
 from squirrel import inspect
+from squirrel.base import SquirrelBase
 
-class Snippet(namedtuple('Snippet', 'text, args, pad_left, pad_right')):
+class Snippet(SquirrelBase, namedtuple('Snippet', 'text, args, pad_left, pad_right')):
     '''
     Represents a piece of arbitrary SQL, potentially with placeholders
     and parameterized arguments. The padding information matters for
@@ -22,9 +23,6 @@ class Snippet(namedtuple('Snippet', 'text, args, pad_left, pad_right')):
     @classmethod
     def from_sql(cls, text, args=(), pad_left=True, pad_right=True):
         return cls(text, args, pad_left, pad_right)
-
-    # Possible TODO: Snippet.from_raw which escapes placeholders?
-    # Not sure there's any value to that...
 
 class Const(object):
     "Just a namespace of helpful snippets."

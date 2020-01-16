@@ -1,8 +1,8 @@
-from squirrel import inspect, Snippet
+from squirrel import inspect, Snippet, base
 
 PADDING = ' '
 
-class Chain(tuple):
+class Chain(base.SquirrelBase, tuple):
     @property
     def text(self):
         return ''.join(self._gen_text())
