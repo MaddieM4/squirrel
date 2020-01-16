@@ -42,3 +42,7 @@ class SELECT(object):
     @property
     def text(self):
         return self.to_chain().text
+
+    @property
+    def args(self):
+        return self.to_chain().args

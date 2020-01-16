@@ -49,6 +49,7 @@ class Const(object):
     FROM   = Snippet.from_sql('FROM')
     WHERE  = Snippet.from_sql('WHERE')
     JOIN   = Snippet.from_sql('JOIN')
+    LEFT_JOIN = Snippet.from_sql('LEFT JOIN')
 
     GROUP_BY = Snippet.from_sql('GROUP BY')
     ORDER_BY = Snippet.from_sql('ORDER BY')

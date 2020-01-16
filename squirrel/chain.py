@@ -46,3 +46,6 @@ class Chain(tuple):
                 yield sep
             yield item
             emit_sep = True
+
+    def to_snippet(self):
+        return Snippet.from_inspect(self)
